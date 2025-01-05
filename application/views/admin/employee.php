@@ -181,7 +181,7 @@
                         <div class="card-header">
                             <h3 class="card-title">All Employee </h3>
 
-
+sssdsd
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
@@ -280,18 +280,18 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="<?php echo base_url('Employee/update_employees'); ?>"
+                                                        <form
+                                                            action="<?php echo base_url('Employee/update_employees'); ?>"
                                                             method="POST">
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="id"
                                                                     value="<?php echo $employee->id; ?>">
                                                                 <div class="form-group">
                                                                     <label for="role">User name</label>
-                                                                    <input type="text" name="name"
-                                                                        class="form-control"
-                                                                        value="<?php echo $employee->name; ?>"
-                                                                        required>
-                                                                </div>  <div class="form-group">
+                                                                    <input type="text" name="name" class="form-control"
+                                                                        value="<?php echo $employee->name; ?>" required>
+                                                                </div>
+                                                                <div class="form-group">
                                                                     <label for="role">Email</label>
                                                                     <input type="email" name="email"
                                                                         class="form-control"
@@ -302,13 +302,15 @@
                                                                     <label for="role">Designation</label>
                                                                     <input type="text" name="designation"
                                                                         class="form-control"
-                                                                        value="<?php echo $employee->designation; ?>" required>
+                                                                        value="<?php echo $employee->designation; ?>"
+                                                                        required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="role">Contact info</label>
                                                                     <input type="text" name="contact_info"
                                                                         class="form-control"
-                                                                        value="<?php echo $employee->contact_info; ?>" required>
+                                                                        value="<?php echo $employee->contact_info; ?>"
+                                                                        required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="status">Status</label>
@@ -462,14 +464,13 @@ $(document).on('click', '.deactivate-btn, .activate-btn', function() {
             status: newStatus
         },
         success: function(response) {
-  
+
             alert('Employee status updated successfully.');
-            location.reload(); 
+            location.reload();
         },
         error: function() {
             alert('Error updating user status.');
         }
     });
 });
-
 </script>
