@@ -7,6 +7,7 @@ $route['Role'] = 'Admin/roles';
 $route['Departments'] = 'Admin/departments';
 $route['Users'] = 'Admin/users';
 $route['Employees'] = 'Employee/employees';
+$route['Tasks'] = 'Task/task';
 
 
 

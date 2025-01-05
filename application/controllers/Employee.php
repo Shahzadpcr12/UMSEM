@@ -150,14 +150,14 @@ class Employee extends CI_Controller {
     public function filter_emp()
     {
         $department_id = $this->input->post('department_id');
-        $designation = $this->input->post('role_id'); // role_id is actually designation
+        $designation = $this->input->post('role_id'); 
     
         $this->db->select('employees.id, employees.name,employees.created_at, employees.designation, employees.email, employees.status, departments.dep_name, users.username');
     $this->db->from('employees');
     $this->db->join('departments', 'employees.department_id = departments.id', 'left');
-    $this->db->join('users', 'employees.user_id = users.id', 'left'); // Join users table to get username
+    $this->db->join('users', 'employees.user_id = users.id', 'left'); 
     
-        // Apply filters if values are provided
+        
         if (!empty($department_id)) {
             $this->db->where('employees.department_id', $department_id);
         }
@@ -168,7 +168,7 @@ class Employee extends CI_Controller {
         $query = $this->db->get();
         $employees = $query->result();
     
-        // Prepare the response HTML
+        
         $output = '';
         foreach ($employees as $employee) {
             $output .= '<tr>';
