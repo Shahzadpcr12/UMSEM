@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Employee Adding section</h1>
+                    <h1>Users Adding section</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add Employee</h3>
+                            <h3 class="card-title">Add Users</h3>
                         </div>
 
 
@@ -47,7 +47,7 @@
                         </div>
 
                         <?php endif; ?>
-                        <form action="<?php echo base_url().'Employee/add_employeesdata'; ?>" method="POST">
+                        <form action="<?php echo base_url().'Users/add_usersdata'; ?>" method="POST">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
@@ -56,10 +56,14 @@
 
                                         <div class="form-group">
                                             <label for="dep_name">User Name</label>
-                                            <input type="text" class="form-control " id="name" name="name"
+                                            <input type="text" class="form-control " name="username" id="username"
                                                 placeholder="Enter User Name" required>
 
-
+                                            <?php if (form_error('username')): ?>
+                                            <div class="invalid">
+                                                <?php echo form_error('username'); ?>
+                                            </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
 
@@ -76,7 +80,30 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-6">
 
+
+
+                                        <div class="form-group">
+                                            <label for="dep_name">Contact Info</label>
+                                            <input type="number" class="form-control " name="contact_info" id="contact_info"
+                                                placeholder="Enter Contact Info" required>
+
+                                         
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label for="dep_name">Designation</label>
+                                            <input type="text" class="form-control " name="designation" id="designation"
+                                                placeholder="Enter Designation" required>
+
+                                         
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
@@ -114,28 +141,6 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="dep_name">Designation</label>
-                                            <input type="text" class="form-control " id="designation" name="designation"
-                                                placeholder="Enter Designation " required>
-
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="dep_name">Contact</label>
-                                            <input type="number" class="form-control " id="contact_info"
-                                                name="contact_info" placeholder="Enter Contact " required>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
                                             <label>Departments</label>
                                             <select class="form-control select2" name="department_id" id="department_id"
                                                 style="width: 100%;" required>
@@ -151,13 +156,13 @@
 
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label>Assign User</label>
-                                            <select class="form-control select2" id="user_id" name="user_id"
+                                            <label>Roles</label>
+                                            <select class="form-control select2" id="role_id" name="role_id"
                                                 style="width: 100%;" required>
-                                                <option selected="selected" disabled>Select User</option>
-                                                <?php foreach ($all_users as $user): ?>
-                                                <option value="<?php echo $user->id; ?>">
-                                                    <?php echo $user->username; ?>
+                                                <option selected="selected" disabled>Select Role</option>
+                                                <?php foreach ($all_role as $role): ?>
+                                                <option value="<?php echo $role->id; ?>">
+                                                    <?php echo $role->role; ?>
                                                 </option>
                                                 <?php endforeach; ?>
                                             </select>
@@ -173,26 +178,27 @@
                                 <button type="submit" class="btn btn-primary">Add</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
 
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">All Employee </h3>
+                            <h3 class="card-title">All Users</h3>
 
 
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive p-0">
-                            <!-- <button id="generateReport" class="btn btn-success btn-sm">Download Report (PDF)</button> -->
-
                             <table id="example1" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Name</th>
+                                        <th>Username</th>
                                         <th>Email</th>
+                                        <th>Contact info</th>
+                                        <th>Designation</th>
                                         <th>Status</th>
                                         <th>
                                             Department
@@ -200,76 +206,73 @@
                                             <select class="form-control form-control-sm" id="departmentFilter"
                                                 name="departmentFilter" style="width: 100%;">
                                                 <option value="">All Departments</option>
-                                                <?php foreach ($depall as $department): ?>
-                                                <option value="<?php echo $department->id; ?>">
-                                                    <?php echo $department->dep_name; ?></option>
+                                                <?php foreach ($depall as $deps): ?>
+                                                <option value="<?php echo $deps->id; ?>"><?php echo $deps->dep_name; ?>
+                                                </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </th>
-
                                         <th>
-                                            Designation
+                                            Role
                                             <br>
-                                            <select class="form-control form-control-sm" id="designationFilter"
-                                                name="designationFilter" style="width: 100%;">
-                                                <option value="">All Designations</option>
-                                                <?php foreach ($empall as $designation): ?>
-                                                <option value="<?php echo $designation->designation; ?>">
-                                                    <?php echo $designation->designation; ?></option>
+                                            <select class="form-control form-control-sm" id="roleFilter"
+                                                name="roleFilter" style="width: 100%;">
+                                                <option value="">All Roles</option>
+                                                <?php foreach ($roleall as $roles): ?>
+                                                <option value="<?php echo $roles->id; ?>"><?php echo $roles->role; ?>
+                                                </option>
                                                 <?php endforeach; ?>
                                             </select>
                                         </th>
-
-                                        <th>Assign user</th>
-
-
-
                                         <th>Created Date</th>
                                         <th>Active/Deactive</th>
                                         <th>Update</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if ($all_employee): ?>
-                                    <?php foreach ($all_employee as $employee): ?>
+                                    <?php if ($all_users): ?>
+                                    <?php foreach ($all_users as $users): ?>
                                     <tr>
-                                        <td><?php echo $employee->id; ?></td>
-                                        <td><?php echo $employee->name; ?></td>
-                                        <td><?php echo $employee->email; ?></td>
+                                        <td><?php echo $users->id; ?></td>
+                                        <td><?php echo $users->username; ?></td>
+                                        <td><?php echo $users->email; ?></td>
+                                        <td><?php echo $users->contact_info; ?></td>
+                                        <td><?php echo $users->designation; ?></td>
                                         <td>
                                             <span class="badge bg-success" style="font-size: 14px; padding: 8px;">
-                                                <?php echo $employee->status; ?>
+                                                <?php echo $users->status; ?>
                                             </span>
                                         </td>
                                         <td>
                                             <span class="badge bg-success" style="font-size: 14px; padding: 8px;">
-                                                <?php echo $employee->dep_name; ?>
+                                                <?php echo $users->dep_name; ?>
                                             </span>
                                         </td>
-
-                                        <td><?php echo $employee->designation; ?></td>
-                                        <td><?php echo $employee->username; ?></td>
-
-                                        <td><?php echo $employee->created_at; ?></td>
                                         <td>
-                                            <?php if ($employee->status === 'Active'): ?>
+                                            <span class="badge bg-secondary" style="font-size: 14px; padding: 8px;">
+                                                <?php echo $users->role; ?>
+                                            </span>
+                                        </td>
+                                        <td><?php echo $users->created_at; ?></td>
+                                        <td>
+                                            <?php if ($users->status === 'Active'): ?>
                                             <button class="btn btn-warning btn-sm deactivate-btn"
-                                                data-id="<?php echo $employee->id; ?>" data-status="Inactive">
+                                                data-id="<?php echo $users->id; ?>" data-status="Inactive">
                                                 Deactivate
                                             </button>
                                             <?php else: ?>
                                             <button class="btn btn-success btn-sm activate-btn"
-                                                data-id="<?php echo $employee->id; ?>" data-status="Active">
+                                                data-id="<?php echo $users->id; ?>" data-status="Active">
                                                 Activate
                                             </button>
                                             <?php endif; ?>
                                         </td>
                                         <td>
                                             <button class="btn btn-primary btn-sm" data-toggle="modal"
-                                                data-target="#updateRoleModal<?php echo $employee->id; ?>">
+                                                data-target="#updateRoleModal<?php echo $users->id; ?>">
                                                 Update
                                             </button>
-                                            <div class="modal fade" id="updateRoleModal<?php echo $employee->id; ?>"
+                                            <div class="modal fade" id="updateRoleModal<?php echo $users->id; ?>"
                                                 tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
@@ -280,46 +283,46 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form
-                                                            action="<?php echo base_url('Employee/update_employees'); ?>"
+                                                        <form action="<?php echo base_url('Users/update_user'); ?>"
                                                             method="POST">
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="id"
-                                                                    value="<?php echo $employee->id; ?>">
+                                                                    value="<?php echo $users->id; ?>">
                                                                 <div class="form-group">
                                                                     <label for="role">User name</label>
-                                                                    <input type="text" name="name" class="form-control"
-                                                                        value="<?php echo $employee->name; ?>" required>
+                                                                    <input type="text" name="username"
+                                                                        class="form-control"
+                                                                        value="<?php echo $users->username; ?>"
+                                                                        required>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="role">Email</label>
-                                                                    <input type="email" name="email"
+                                                                    <label for="role">Contact Info</label>
+                                                                    <input type="number" name="contact_info"
                                                                         class="form-control"
-                                                                        value="<?php echo $employee->email; ?>"
+                                                                        value="<?php echo $users->contact_info; ?>"
                                                                         required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="role">Designation</label>
                                                                     <input type="text" name="designation"
                                                                         class="form-control"
-                                                                        value="<?php echo $employee->designation; ?>"
+                                                                        value="<?php echo $users->designation; ?>"
                                                                         required>
                                                                 </div>
                                                                 <div class="form-group">
-                                                                    <label for="role">Contact info</label>
-                                                                    <input type="text" name="contact_info"
+                                                                    <label for="role">Email</label>
+                                                                    <input type="email" name="email"
                                                                         class="form-control"
-                                                                        value="<?php echo $employee->contact_info; ?>"
-                                                                        required>
+                                                                        value="<?php echo $users->email; ?>" required>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="status">Status</label>
                                                                     <select name="status" class="form-control" required>
                                                                         <option value="Active"
-                                                                            <?php echo $employee->status === 'Active' ? 'selected' : ''; ?>>
+                                                                            <?php echo $users->status === 'Active' ? 'selected' : ''; ?>>
                                                                             Active</option>
                                                                         <option value="Inactive"
-                                                                            <?php echo $employee->status === 'Inactive' ? 'selected' : ''; ?>>
+                                                                            <?php echo $users->status === 'Inactive' ? 'selected' : ''; ?>>
                                                                             Inactive</option>
                                                                     </select>
                                                                 </div>
@@ -333,7 +336,7 @@
                                                                         <option disabled>Select Department</option>
                                                                         <?php foreach ($all_dep as $dep): ?>
                                                                         <option value="<?php echo $dep->id; ?>"
-                                                                            <?php echo ($employee->department_id == $dep->id) ? 'selected' : ''; ?>>
+                                                                            <?php echo ($users->department_id == $dep->id) ? 'selected' : ''; ?>>
                                                                             <?php echo $dep->dep_name; ?>
                                                                         </option>
                                                                         <?php endforeach; ?>
@@ -341,14 +344,14 @@
                                                                 </div>
 
                                                                 <div class="form-group">
-                                                                    <label>Assign User</label>
-                                                                    <select class="form-control select2" name="user_id"
+                                                                    <label>Roles</label>
+                                                                    <select class="form-control select2" name="role_id"
                                                                         style="width: 100%;" required>
-                                                                        <option disabled>Select user</option>
-                                                                        <?php foreach ($all_users as $users): ?>
-                                                                        <option value="<?php echo $users->id; ?>"
-                                                                            <?php echo ($employee->user_id == $users->id) ? 'selected' : ''; ?>>
-                                                                            <?php echo $users->username; ?>
+                                                                        <option disabled>Select Role</option>
+                                                                        <?php foreach ($all_role as $role): ?>
+                                                                        <option value="<?php echo $role->id; ?>"
+                                                                            <?php echo ($users->role_id == $role->id) ? 'selected' : ''; ?>>
+                                                                            <?php echo $role->role; ?>
                                                                         </option>
                                                                         <?php endforeach; ?>
                                                                     </select>
@@ -378,18 +381,33 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
+
             </div>
+
+
         </div>
     </section>
 
-</div>
+</div><!-- Bootstrap CSS -->
+
+
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
 <script>
 new DataTable('#example1');
 </script>
+<script>
+new DataTable('#example2');
+</script>
+
+
+
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const deleteButtons = document.querySelectorAll('.delete-btn');
@@ -409,7 +427,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href =
-                        '<?php echo base_url("Admin/delete_role/"); ?>' + roleId;
+                        '<?php echo base_url("Users/delete_department/"); ?>' + roleId;
                 }
             });
         });
@@ -430,18 +448,21 @@ setTimeout(function() {
 
 <script>
 $(document).ready(function() {
-    $('#departmentFilter, #designationFilter').on('change', function() {
+
+    $('#departmentFilter, #roleFilter').on('change', function() {
         const departmentId = $('#departmentFilter').val();
-        const designation = $('#designationFilter').val();
+        const roleId = $('#roleFilter').val();
+
 
         $.ajax({
-            url: '<?php echo base_url("Employee/filter_emp"); ?>',
+            url: '<?php echo base_url("Users/filter_users"); ?>',
             type: 'POST',
             data: {
                 department_id: departmentId,
-                role_id: designation // Send designation here
+                role_id: roleId
             },
             success: function(response) {
+
                 $('#example1 tbody').html(response);
             },
             error: function() {
@@ -457,20 +478,23 @@ $(document).on('click', '.deactivate-btn, .activate-btn', function() {
     const newStatus = $(this).data('status');
 
     $.ajax({
-        url: "<?php echo base_url('Employee/update_status'); ?>",
+        url: "<?php echo base_url('Users/update_status'); ?>",
         type: "POST",
         data: {
             id: userId,
             status: newStatus
         },
         success: function(response) {
-
-            alert('Employee status updated successfully.');
-            location.reload();
+            // Reload the table or update the status dynamically
+            alert('User status updated successfully.');
+            location.reload(); // Reloads the page to reflect changes
         },
         error: function() {
             alert('Error updating user status.');
         }
     });
 });
+
+
+
 </script>

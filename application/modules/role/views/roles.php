@@ -47,7 +47,7 @@
                         </div>
 
                         <?php endif; ?>
-                        <form action="<?php echo base_url().'Admin/add_roles'; ?>" method="POST">
+                        <form action="<?php echo base_url().'Role/add_roles'; ?>" method="POST">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="role">Role</label>
@@ -86,6 +86,7 @@
                                         <th>Roles</th>
                                         <th>Delete</th>
                                         <th>Update</th>
+                                        <th>Permission</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -140,6 +141,12 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <a href="<?php echo base_url('role/Role/manage_permissions/' . $roles->id); ?>"
+                                                class="btn btn-warning btn-sm">
+                                                Permission
+                                            </a>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                     <?php endif; ?>
@@ -176,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href =
-                        '<?php echo base_url("Admin/delete_role/"); ?>' + roleId;
+                        '<?php echo base_url("Role/delete_role/"); ?>' + roleId;
                 }
             });
         });

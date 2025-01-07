@@ -47,7 +47,7 @@
                         </div>
 
                         <?php endif; ?>
-                        <form action="<?php echo base_url().'Admin/add_departments'; ?>" method="POST">
+                        <form action="<?php echo base_url().'Department/add_departments'; ?>" method="POST">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="role">Department Name</label>
@@ -119,7 +119,7 @@
                                                             </button>
                                                         </div>
                                                         <form
-                                                            action="<?php echo base_url('Admin/update_department'); ?>"
+                                                            action="<?php echo base_url('Department/update_department'); ?>"
                                                             method="POST">
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="id"

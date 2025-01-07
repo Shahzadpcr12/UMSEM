@@ -4,7 +4,7 @@ class Auth_model extends CI_Model
 {
     public function admin_data($data)
     { //login form data
-        $query = $this->db->get_where('xxadminlogin', $data);
+        $query = $this->db->get_where('employees', $data);
         if ($query) {
             return $query->row();
         }

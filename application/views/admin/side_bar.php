@@ -52,7 +52,7 @@
                     <a href="<?= base_url('Departments') ?>" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
-                        Departments
+                            Departments
                         </p>
                     </a>
                 </li>
@@ -60,7 +60,7 @@
                     <a href="<?= base_url('Users') ?>" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
-                        Users
+                            Users
                         </p>
                     </a>
                 </li>
@@ -68,14 +68,22 @@
                     <a href="<?= base_url('Employees') ?>" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
-                        Employees
+                            Employees
                         </p>
                     </a>
-                </li> <li class="nav-item">
+                </li>
+                <li class="nav-item">
                     <a href="<?= base_url('Tasks') ?>" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
-                        Tasks
+                            Tasks
+                        </p>
+                    </a>
+                </li> <li class="nav-item">
+                    <a href="<?= base_url('Permissions') ?>" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                        Permissions
                         </p>
                     </a>
                 </li>
