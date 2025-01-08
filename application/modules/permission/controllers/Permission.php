@@ -5,15 +5,16 @@ class Permission extends MX_Controller {
 
 	public function __construct()
     {
-        parent::__construct();
-        if (!$this->session->userdata('admin_id')) {
-            redirect('Auth/index');
-        }
+     
     }
 
     public function permissions()
     { 
- 
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'permission', 'view')) {
+            show_error('You do not have permission to access this page.', 403);
+        }
         $data["all_permission"] = get_query_data("
        SELECT * from permissions");
    
@@ -26,6 +27,15 @@ class Permission extends MX_Controller {
 
     public function add_permission()
 {
+
+    $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'permission', 'add')) {
+            $this->load->view('admin/header');
+            $this->load->view('admin/side_bar');
+            $this->load->view('admin/error');
+            $this->load->view('admin/footer');
+        }
     $module_name = $this->input->post('module_name');
     $actions = $this->input->post('action'); 
 
@@ -48,6 +58,12 @@ class Permission extends MX_Controller {
     redirect('Permissions');
 }
 public function delete_permission($id) {
+
+    $role_id = $this->session->userdata('role_id');
+
+    if (!has_module_action_permission($role_id, 'permission', 'delete')) {
+        show_error('You do not have permission to access this page.', 403);
+    }
     $this->db->where('id', $id);
     if ($this->db->delete('permissions')) {
         $this->session->set_flashdata('swal', [

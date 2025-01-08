@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2025 at 06:56 PM
+-- Generation Time: Jan 08, 2025 at 07:28 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.28
 
@@ -37,7 +37,6 @@ CREATE TABLE `departments` (
 --
 
 INSERT INTO `departments` (`id`, `dep_name`) VALUES
-(1, 'Maths dep'),
 (3, 'English'),
 (4, 'Maths');
 
@@ -52,7 +51,7 @@ CREATE TABLE `employees` (
   `username` varchar(100) NOT NULL,
   `email` text NOT NULL,
   `password` text NOT NULL,
-  `department_id` int(11) DEFAULT NULL,
+  `department_id` varchar(255) DEFAULT NULL,
   `role_id` int(255) NOT NULL,
   `designation` varchar(255) NOT NULL,
   `contact_info` varchar(255) NOT NULL,
@@ -67,14 +66,10 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `username`, `email`, `password`, `department_id`, `role_id`, `designation`, `contact_info`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'aaaaadsdsdsd', 'qirepehita@mailinator.com', '4fc333e0a029154c9437ab17980b9661', 3, 2, 'aaaa', '3333', 'Inactive', 4, '2025-01-05', '2025-01-06 09:19:53'),
-(2, 'Thor Porter', 'nuvu@mailinator.com', '83a57780ae70b6aa96b9131b65102a07', 3, 11, 'task manager', '4343434', 'Inactive', 4, '2025-01-05', '2025-01-06 09:20:01'),
-(3, 'Maggie Watkins', 'giqeqi@mailinator.com', '9d2076d7e9d1eec72a9e762dc1f2afd9', 1, 1, 'manager', 'sdsd', 'Active', 2, '2025-01-05', '2025-01-07 08:44:17'),
-(4, 'Hayfa Avery', 'tekumisiz@mailinator.com', '3148cdcaa34d9312e81f48d6fb755d9c', 3, 9, 'Voluptas libero dese', '98', 'Inactive', 1, '2025-01-05', '2025-01-06 09:20:22'),
-(5, 'boqocuqyd', 'lezi@mailinator.com', '25d55ad283aa400af464c76d713c07ad', 3, 2, 'Illo veniam minim r', '754535435435', 'Active', NULL, '2025-01-06', '2025-01-07 16:38:10'),
-(6, 'toxuwy', 'nugaqyzi@mailinator.com', '25d55ad283aa400af464c76d713c07ad', 3, 1, 'Quaerat eum est vel', '44', 'Inactive', NULL, '2025-01-06', '2025-01-07 17:11:11'),
-(7, 'qedulid', 'dadikytaba@mailinator.com', '3fdd4f1087a7181ea9aa2f5375366cf4', 3, 9, 'Deserunt aliqua Est', '1', 'Active', 2, '2025-01-06', '2025-01-06 10:17:38'),
-(8, 'admin', 'admin@gmail.com', '25d55ad283aa400af464c76d713c07ad', NULL, 2, '', '', 'Active', NULL, '2025-01-07', '2025-01-07 17:00:55');
+(1, 'pehita', 'qirepehita@mailinator.com', '4fc333e0a029154c9437ab17980b9661', NULL, 1, 'aaaa', '3333', 'Inactive', 4, '2025-01-05', '2025-01-08 16:17:08'),
+(5, 'boqocuqyd', 'lezi@mailinator.com', '25d55ad283aa400af464c76d713c07ad', NULL, 2, 'Illo veniam minim r', '754535435435', 'Active', NULL, '2025-01-06', '2025-01-08 15:49:23'),
+(6, 'toxuwy34', 'nugaqyzi@mailinator.com', '25d55ad283aa400af464c76d713c07ad', '3', 2, 'Quaerat eum est vel', '44', 'Inactive', NULL, '2025-01-06', '2025-01-08 18:19:30'),
+(10, 'admin', 'admin@gmail.com', '25d55ad283aa400af464c76d713c07ad', NULL, 1, '', '', 'Active', NULL, '2025-01-08', '2025-01-08 18:13:57');
 
 -- --------------------------------------------------------
 
@@ -84,6 +79,7 @@ INSERT INTO `employees` (`id`, `username`, `email`, `password`, `department_id`,
 
 CREATE TABLE `permissions` (
   `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `module_name` varchar(50) NOT NULL,
   `action` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -92,14 +88,33 @@ CREATE TABLE `permissions` (
 -- Dumping data for table `permissions`
 --
 
-INSERT INTO `permissions` (`id`, `module_name`, `action`) VALUES
-(1, 'admin', 'add'),
-(2, 'Manager', 'add'),
-(3, 'admin', 'view'),
-(14, 'permission', 'add'),
-(15, 'permission', 'delete'),
-(16, 'permission', 'view'),
-(17, 'permission', 'update');
+INSERT INTO `permissions` (`id`, `name`, `module_name`, `action`) VALUES
+(14, 'delete_employee', 'employee', 'delete'),
+(15, 'delete_permission', 'permission', 'delete'),
+(16, 'view_permission', 'permission', 'view'),
+(17, 'update_permission', 'permission', 'update'),
+(18, '', 'employee', 'update'),
+(20, '', 'role', 'add'),
+(21, '', 'permission', 'add'),
+(26, '', 'role', 'delete'),
+(27, '', 'role', 'view'),
+(28, '', 'role', 'update'),
+(33, '', 'user', 'add'),
+(34, '', 'user', 'delete'),
+(35, '', 'user', 'view'),
+(36, '', 'user', 'update'),
+(37, '', 'task', 'add'),
+(38, '', 'task', 'delete'),
+(39, '', 'task', 'view'),
+(40, '', 'task', 'update'),
+(41, '', 'department', 'add'),
+(42, '', 'department', 'delete'),
+(43, '', 'department', 'view'),
+(44, '', 'department', 'update'),
+(48, '', 'activitylogs', 'delete'),
+(49, '', 'activitylogs', 'view'),
+(50, '', 'employee', 'view'),
+(52, '', 'employee', 'add');
 
 -- --------------------------------------------------------
 
@@ -118,8 +133,7 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `role`) VALUES
 (1, 'Admin'),
-(2, 'Manager'),
-(13, 'Role Adding section');
+(2, 'Manager');
 
 -- --------------------------------------------------------
 
@@ -138,11 +152,32 @@ CREATE TABLE `role_permissions` (
 --
 
 INSERT INTO `role_permissions` (`id`, `role_id`, `permission_id`) VALUES
-(6, 1, 1),
-(7, 1, 2),
-(8, 2, 2),
 (9, 2, 14),
-(10, 2, 17);
+(10, 2, 17),
+(265, 1, 14),
+(266, 1, 18),
+(267, 1, 52),
+(268, 1, 15),
+(269, 1, 17),
+(270, 1, 21),
+(271, 1, 20),
+(272, 1, 26),
+(273, 1, 27),
+(274, 1, 28),
+(275, 1, 33),
+(276, 1, 34),
+(277, 1, 35),
+(278, 1, 36),
+(279, 1, 37),
+(280, 1, 38),
+(281, 1, 39),
+(282, 1, 40),
+(283, 1, 41),
+(284, 1, 42),
+(285, 1, 43),
+(286, 1, 44),
+(287, 1, 48),
+(288, 1, 49);
 
 -- --------------------------------------------------------
 
@@ -160,6 +195,7 @@ CREATE TABLE `tasks` (
   `priority` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `created_by` int(11) DEFAULT NULL,
+  `createby` varchar(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -168,9 +204,35 @@ CREATE TABLE `tasks` (
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `title`, `description`, `assigned_tos`, `department_id`, `to_assigned`, `priority`, `status`, `created_by`, `created_at`, `updated_at`) VALUES
-(19, 'sadasdasd', NULL, NULL, NULL, '3', 'Medium', 'In Progress', NULL, '2025-01-07 11:42:24', '2025-01-07 12:56:43'),
-(22, 'Quae ipsa veniam a', 'Ut minus omnis qui m', NULL, NULL, '3', 'Medium', 'In Progress', NULL, '2025-01-07 13:38:14', '2025-01-07 13:38:14');
+INSERT INTO `tasks` (`id`, `title`, `description`, `assigned_tos`, `department_id`, `to_assigned`, `priority`, `status`, `created_by`, `createby`, `created_at`, `updated_at`) VALUES
+(19, 'sadasdasd', NULL, NULL, 3, '', 'Low', 'In Progress', NULL, NULL, '2025-01-07 11:42:24', '2025-01-08 18:23:20'),
+(22, 'Quae ipsa veniam a', 'Ut minus omnis qui m', NULL, NULL, '3', 'Medium', 'In Progress', NULL, NULL, '2025-01-07 13:38:14', '2025-01-07 13:38:14'),
+(23, 'Pariatur Veniam eo', 'Sed nisi magna quia ', NULL, NULL, '5', 'Medium', 'Pending', NULL, NULL, '2025-01-08 16:20:18', '2025-01-08 16:20:18'),
+(24, 'Omnis expedita quia ', 'Autem distinctio Pr', NULL, NULL, '1', 'Medium', 'Pending', NULL, NULL, '2025-01-08 16:21:39', '2025-01-08 16:21:39'),
+(26, 'Ex adipisci occaecat', 'Dolor est reiciendis', NULL, NULL, '9', 'Medium', 'Completed', NULL, '8', '2025-01-08 16:26:40', '2025-01-08 16:26:40'),
+(31, 'Ad consequatur In s', 'Odio deleniti ullam ', NULL, NULL, '6', 'Medium', 'Pending', NULL, '8', '2025-01-08 18:03:53', '2025-01-08 18:03:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task_activity_log`
+--
+
+CREATE TABLE `task_activity_log` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(255) DEFAULT NULL,
+  `task_id` varchar(255) NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `task_activity_log`
+--
+
+INSERT INTO `task_activity_log` (`id`, `user_id`, `task_id`, `status`, `created_date`, `updated_date`) VALUES
+(6, '10', '19', 'edit', '2025-01-08 18:23:20', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -235,7 +297,6 @@ ALTER TABLE `departments`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `department_id` (`department_id`),
   ADD KEY `user_id` (`user_id`);
 
 --
@@ -256,7 +317,7 @@ ALTER TABLE `roles`
 ALTER TABLE `role_permissions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `role_id` (`role_id`),
-  ADD KEY `permission_id` (`permission_id`);
+  ADD KEY `role_permissions_ibfk_2` (`permission_id`);
 
 --
 -- Indexes for table `tasks`
@@ -266,6 +327,12 @@ ALTER TABLE `tasks`
   ADD KEY `assigned_to` (`assigned_tos`),
   ADD KEY `department_id` (`department_id`),
   ADD KEY `created_by` (`created_by`);
+
+--
+-- Indexes for table `task_activity_log`
+--
+ALTER TABLE `task_activity_log`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -288,37 +355,43 @@ ALTER TABLE `xxadminlogin`
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `role_permissions`
 --
 ALTER TABLE `role_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=289;
 
 --
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `task_activity_log`
+--
+ALTER TABLE `task_activity_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -340,7 +413,6 @@ ALTER TABLE `xxadminlogin`
 -- Constraints for table `employees`
 --
 ALTER TABLE `employees`
-  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`),
   ADD CONSTRAINT `employees_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
@@ -348,7 +420,7 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `role_permissions`
   ADD CONSTRAINT `role_permissions_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`),
-  ADD CONSTRAINT `role_permissions_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`);
+  ADD CONSTRAINT `role_permissions_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tasks`

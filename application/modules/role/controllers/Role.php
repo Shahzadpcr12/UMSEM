@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Role extends MX_Controller {
+class Role extends MY_Controller {
 
     // public function __construct() {
     //     parent::__construct();
@@ -14,6 +14,18 @@ class Role extends MX_Controller {
 
 	public function roles()
 	{
+        $role_id = $this->session->userdata('role_id');
+
+if (!has_module_action_permission($role_id, 'role', 'view')) {
+    // $this->load->view('admin/header');
+    // $this->load->view('admin/side_bar');
+    // $this->load->view('admin/error');
+    // $this->load->view('admin/footer');
+    show_error('You do not have permission to access this page.', 403);
+
+}
+
+
 
 		$data["all_roles"] = get_query_data("
 		SELECT * from roles");
@@ -26,6 +38,12 @@ class Role extends MX_Controller {
 
 
 	public function add_roles() {
+
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'role', 'add')) {
+            show_error('You do not have permission to access this page.', 403);
+        }
 		$this->load->library('form_validation');
 	
 		$this->form_validation->set_rules(
@@ -66,6 +84,12 @@ class Role extends MX_Controller {
 	}
 	
 public function delete_role($id) {
+
+    $role_id = $this->session->userdata('role_id');
+
+    if (!has_module_action_permission($role_id, 'role', 'delete')) {
+        show_error('You do not have permission to access this page.', 403);
+    }
     $this->db->where('id', $id);
     if ($this->db->delete('roles')) {
         $this->session->set_flashdata('swal', [
@@ -83,6 +107,11 @@ public function delete_role($id) {
 
 public function update_role() {
 
+    $role_id = $this->session->userdata('role_id');
+
+    if (!has_module_action_permission($role_id, 'role', 'update')) {
+        show_error('You do not have permission to access this page.', 403);
+    }
     $this->form_validation->set_rules('role', 'Role', 'required|trim');
 
     if ($this->form_validation->run() == FALSE) {

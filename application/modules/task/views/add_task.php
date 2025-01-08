@@ -159,7 +159,7 @@
                                             <th>Status</th>
                                             <th>Priority</th>
                                             <th>Create Date</th>
-                                            <th>Update</th>
+                                            <th>Edit</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -185,7 +185,7 @@
                                             <td><?php echo $tasks->created_at; ?></td>
                                             <td>
                                             <a class="btn btn-primary btn-sm" href="<?php echo base_url('Task/edit_task/'.$tasks->id); ?>">
-    Update
+                                            Edit
 </a>
 
 

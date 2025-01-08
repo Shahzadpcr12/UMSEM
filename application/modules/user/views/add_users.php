@@ -226,7 +226,7 @@
                                         </th>
                                         <th>Created Date</th>
                                         <th>Active/Deactive</th>
-                                        <th>Update</th>
+                                        <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -270,20 +270,20 @@
                                         <td>
                                             <button class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#updateRoleModal<?php echo $users->id; ?>">
-                                                Update
+                                                Edit
                                             </button>
                                             <div class="modal fade" id="updateRoleModal<?php echo $users->id; ?>"
                                                 tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Update User</h5>
+                                                            <h5 class="modal-title">Edit User</h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="<?php echo base_url('Users/update_user'); ?>"
+                                                        <form action="<?php echo base_url('UpdateUser'); ?>"
                                                             method="POST">
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="id"

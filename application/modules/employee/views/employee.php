@@ -234,7 +234,7 @@
                                     <?php foreach ($all_employee as $employee): ?>
                                     <tr>
                                         <td><?php echo $employee->id; ?></td>
-                                        <td><?php echo $employee->username; ?></td>
+                                        <td><?php echo $employee->name; ?></td>
                                         <td><?php echo $employee->email; ?></td>
                                         <td>
                                             <span class="badge bg-success" style="font-size: 14px; padding: 8px;">
@@ -289,32 +289,32 @@
                                                                 <div class="form-group">
                                                                     <label for="role">User name</label>
                                                                     <input type="text" name="username" class="form-control"
-                                                                        value="<?php echo $employee->username; ?>" required>
+                                                                        value="<?php echo $employee->username; ?>" >
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="role">Email</label>
                                                                     <input type="email" name="email"
                                                                         class="form-control"
                                                                         value="<?php echo $employee->email; ?>"
-                                                                        required>
+                                                                        >
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="role">Designation</label>
                                                                     <input type="text" name="designation"
                                                                         class="form-control"
                                                                         value="<?php echo $employee->designation; ?>"
-                                                                        required>
+                                                                        >
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="role">Contact info</label>
                                                                     <input type="text" name="contact_info"
                                                                         class="form-control"
                                                                         value="<?php echo $employee->contact_info; ?>"
-                                                                        required>
+                                                                        >
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="status">Status</label>
-                                                                    <select name="status" class="form-control" required>
+                                                                    <select name="status" class="form-control" >
                                                                         <option value="Active"
                                                                             <?php echo $employee->status === 'Active' ? 'selected' : ''; ?>>
                                                                             Active</option>
@@ -329,7 +329,7 @@
                                                                     <label>Departments</label>
                                                                     <select class="form-control select2"
                                                                         name="department_id" style="width: 100%;"
-                                                                        required>
+                                                                        >
                                                                         <option disabled>Select Department</option>
                                                                         <?php foreach ($all_dep as $dep): ?>
                                                                         <option value="<?php echo $dep->id; ?>"
@@ -343,7 +343,7 @@
                                                                 <div class="form-group">
                                                                     <label>Assign User</label>
                                                                     <select class="form-control select2" name="user_id"
-                                                                        style="width: 100%;" required>
+                                                                        style="width: 100%;" >
                                                                         <option disabled>Select user</option>
                                                                         <?php foreach ($all_users as $users): ?>
                                                                         <option value="<?php echo $users->id; ?>"

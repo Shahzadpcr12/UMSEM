@@ -85,7 +85,7 @@
                                         <th>Id</th>
                                         <th>Roles</th>
                                         <th>Delete</th>
-                                        <th>Update</th>
+                                        <th>Edit</th>
                                         <th>Permission</th>
                                     </tr>
                                 </thead>
@@ -104,7 +104,7 @@
                                         <td>
                                             <button class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#updateRoleModal<?php echo $roles->id; ?>">
-                                                Update
+                                                Edit
                                             </button>
 
 
@@ -113,13 +113,13 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Update Role</h5>
+                                                            <h5 class="modal-title">Edit Role</h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <form action="<?php echo base_url('Admin/update_role'); ?>"
+                                                        <form action="<?php echo base_url('Role/update_role'); ?>"
                                                             method="POST">
                                                             <div class="modal-body">
                                                                 <input type="hidden" name="id"
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             Swal.fire({
                 title: 'Are you sure?',
-                text: 'This action cannot be undone!',
+                // text: 'This action cannot be undone!',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',

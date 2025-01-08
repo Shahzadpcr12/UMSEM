@@ -1,47 +1,60 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Employee extends MX_Controller {
+class Employee extends MY_Controller {
 
-    // public function __construct() {
-    //     parent::__construct();
-    //     // Check if user is logged in
-    //     $this->check_login();  // Call the check_login method from MY_Controller
+    public function __construct() {
+        parent::__construct();
+        // Check if user is logged in
+        // $this->check_login();  // Call the check_login method from MY_Controller
 
-    //     // Restrict access to the 'view_employees' permission (permission_id = 1)
-    //     $this->restrict_access(1);
-    // }
+        // // Restrict access to the 'view_employees' permission (permission_id = 1)
+        // $this->restrict_access(1);
+    }
 
     public function employees() { 
-        // $this->restrict_access(1);
+        $this->load->model('Permission_model');
+        $role_id = $this->session->userdata('role_id');
 
+        if (!has_module_action_permission($role_id, 'employee', 'view')) {
+            show_error('You do not have permission to view this page.', 403);
+        }
+     
         $data["all_users"] = get_query_data("SELECT * FROM users");
         $data["empall"] = get_query_data("SELECT * FROM employees");
         $data["depall"] = get_query_data("SELECT * FROM departments");
         $data["all_dep"] = get_query_data("SELECT * FROM departments");
         $data["all_role"] = get_query_data("SELECT * FROM roles");
         $data["all_employee"] = get_query_data("
-            SELECT 
-                employees.*, 
-                users.username, 
-                departments.dep_name
-            FROM 
-                employees
-            LEFT JOIN 
-                users ON employees.user_id = users.id
-            LEFT JOIN 
-                departments ON employees.department_id = departments.id 
-        ");
-
+        SELECT 
+            employees.*, 
+            employees.username AS name,
+            users.username, 
+            departments.dep_name
+        FROM 
+            employees
+        LEFT JOIN 
+            users ON employees.user_id = users.id
+        LEFT JOIN 
+            departments ON employees.department_id = departments.id
+    ");
+    
+    
         $this->load->view('admin/header');
         $this->load->view('admin/side_bar');
         $this->load->view('employee', $data);
         $this->load->view('admin/footer');
     }
+    
 
     public function add_employeesdata() {
-        // $this->restrict_access(2);
 
+
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'employee', 'add')) {
+            show_error('You do not have permission to view this page.', 403);
+        }
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('username', 'username', 'required|trim');
@@ -144,7 +157,11 @@ class Employee extends MX_Controller {
     }
 
     public function update_employees() {
-        // $this->restrict_access(4);
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'employee', 'update')) {
+            show_error('You do not have permission to view this page.', 403);
+        }
 
         $this->form_validation->set_rules('username', 'username', 'required|trim');
         $this->form_validation->set_rules('department_id', 'department_id', 'required|trim');

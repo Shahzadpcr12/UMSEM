@@ -85,7 +85,7 @@
                                         <th>Id</th>
                                         <th>Departments</th>
                                         <th>Delete</th>
-                                        <th>Update</th>
+                                        <th>Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,7 +103,7 @@
                                         <td>
                                             <button class="btn btn-primary btn-sm" data-toggle="modal"
                                                 data-target="#updateRoleModal<?php echo $dep->id; ?>">
-                                                Update
+                                                Edit
                                             </button>
 
 
@@ -112,7 +112,7 @@
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title">Update Department</h5>
+                                                            <h5 class="modal-title">Edit Department</h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href =
-                        '<?php echo base_url("Admin/delete_department/"); ?>' + roleId;
+                        '<?php echo base_url("Department/delete_department/"); ?>' + roleId;
                 }
             });
         });

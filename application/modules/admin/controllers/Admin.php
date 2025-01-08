@@ -13,6 +13,15 @@ class Admin extends MX_Controller {
     
 	public function index()
 	{
+
+		
+
+		// echo "<pre>";
+		// print_r($data["total_users"]);
+		// exit();
+		// var_dump($data["total_users"]);
+		// var_dump($data["total_tasks"]);
+		// var_dump($data["total_departments"]);
 		$this->load->view('admin/header');
 		$this->load->view('admin/side_bar');
 		$this->load->view('dashboard');

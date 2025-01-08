@@ -5,15 +5,22 @@ class Department extends MX_Controller {
 
 	public function __construct()
     {
-        parent::__construct();
-        if (!$this->session->userdata('admin_id')) {
-            redirect('Auth/index');
-        }
+        // parent::__construct();
+        // if (!$this->session->userdata('admin_id')) {
+        //     redirect('Auth/index');
+        // }
     }
 
     public function departments()
 	{
+        $role_id = $this->session->userdata('role_id');
 
+        if (!has_module_action_permission($role_id, 'department', 'view')) {
+            $this->load->view('admin/header');
+            $this->load->view('admin/side_bar');
+            $this->load->view('admin/error');
+            $this->load->view('admin/footer');
+        }
 		$data["all_dep"] = get_query_data("
 		SELECT * from departments");
 		$this->load->view('admin/header');
@@ -25,6 +32,15 @@ class Department extends MX_Controller {
     
 
 	public function add_departments() {
+
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'department', 'add')) {
+            $this->load->view('admin/header');
+            $this->load->view('admin/side_bar');
+            $this->load->view('admin/error');
+            $this->load->view('admin/footer');
+        }
 		$this->load->library('form_validation');
 	
 		$this->form_validation->set_rules(
@@ -66,6 +82,16 @@ class Department extends MX_Controller {
 	}
 	
 public function delete_department($id) {
+
+    $role_id = $this->session->userdata('role_id');
+
+    if (!has_module_action_permission($role_id, 'department', 'delete')) {
+        // $this->load->view('admin/header');
+        // $this->load->view('admin/side_bar');
+        // $this->load->view('admin/error');
+        // $this->load->view('admin/footer');
+        show_error('You do not have permission to access this page.', 403);
+    }
     $this->db->where('id', $id);
     if ($this->db->delete('departments')) {
         $this->session->set_flashdata('swal', [
@@ -82,7 +108,11 @@ public function delete_department($id) {
 }
 
 public function update_department() {
+    $role_id = $this->session->userdata('role_id');
 
+    if (!has_module_action_permission($role_id, 'department', 'update')) {
+        show_error('You do not have permission to access this page.', 403);
+    }
     $this->form_validation->set_rules('dep_name', 'dep_name', 'required|trim');
 
     if ($this->form_validation->run() == FALSE) {

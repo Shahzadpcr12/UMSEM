@@ -48,6 +48,31 @@ class Permission_model extends CI_Model
             $this->db->insert_batch('role_permissions', $data);
         }
     }
+
+//     public function get_permission_id($permission_name) {
+//         $query = $this->db->get_where('permissions', ['name' => $permission_name]);
+// //         echo "<pre>";
+// // print_r($query);
+// // exit();
+//         if ($query->num_rows() > 0) {
+//             return $query->row()->id;
+//         }
+//         return null; // Permission not found
+//     }
+public function get_permission_id($permission_name)
+{
+    $this->db->select('id');
+    $this->db->where('name', $permission_name);
+    $query = $this->db->get('permissions');
+
+    if ($query->num_rows() > 0) {
+        return $query->row()->id; // Return the permission ID
+    }
+    return null; // Permission not found
+}
+
+
+
 }
 
 

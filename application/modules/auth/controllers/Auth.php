@@ -16,36 +16,42 @@ class Auth extends CI_Controller {
     }
     
 
-    public function login_Admin() {
-        $this->form_validation->set_rules('email', 'email', 'required');
-        $this->form_validation->set_rules('password', 'password', 'required'); 
+   
+    public function login_admin() {
+        $username = $this->input->post('email');
+        $password = $this->input->post('password');
     
-        if ($this->form_validation->run() == false) {
-            $data = array();
-            $this->load->view('admin/login', $data);
-        } else {
-            $data = array(
-                'email' => $this->input->post('email'),
-                'password' => md5($this->input->post('password')),
-            );
+        $this->db->where('email', $username);
+        $this->db->where('password', md5($password));
+        $employee = $this->db->get('employees')->row();
+    
+        if ($employee) {
+            $this->db->select('permission_id');
+            $this->db->from('role_permissions');
+            $this->db->where('role_id', $employee->role_id);
+            $permissions = $this->db->get()->result_array();
+    
+            $permission_ids = array_column($permissions, 'permission_id'); 
+    
+           
+            $this->session->set_userdata([
+                'user_id' => $employee->id,
+                'role_id' => $employee->role_id, 
+                'permissions' => $permission_ids, 
+            ]);
+            // echo '<pre>';
+            // print_r($this->session->userdata());
+            // exit();
             
-            $check = $this->Auth_model->admin_data($data);
-    
-            if ($check != false) {
-              
-                $user = array(
-                    'admin_id' => $check->id,
-                    'email' => $check->email,
-                );
-                $this->session->set_userdata($user);
-    
-                redirect(base_url('Dashboard'));
-            } else {
-                $this->session->set_flashdata('invalid', 'Invalid Email or Password');
-                redirect(base_url('admin-login'));
-            }
+            redirect('Dashboard');
+        } else {
+            $this->session->set_flashdata('error', 'Invalid login credentials.');
+            redirect(base_url('admin-login'));
         }
     }
+    
+    
+    
     
 
     // public function login_admin() {

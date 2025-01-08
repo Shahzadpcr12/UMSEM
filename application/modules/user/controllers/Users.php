@@ -5,15 +5,19 @@ class Users extends MX_Controller {
 
 	public function __construct()
     {
-        parent::__construct();
-        if (!$this->session->userdata('admin_id')) {
-            redirect('Auth/index');
-        }
+        // parent::__construct();
+        // if (!$this->session->userdata('admin_id')) {
+        //     redirect('Auth/index');
+        // }
     }
 
     public function users()
     { 
-       
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'user', 'view')) {
+            show_error('You do not have permission to access this page.', 403);
+        }
        $data["depall"] = get_query_data("
        SELECT * from departments");
        $data["roleall"] = get_query_data("
@@ -50,6 +54,12 @@ class Users extends MX_Controller {
    
    
     public function add_usersdata() {
+
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'user', 'add')) {
+            show_error('You do not have permission to access this page.', 403);
+        }
        $this->load->library('form_validation');
    
        $this->form_validation->set_rules(
@@ -188,7 +198,11 @@ class Users extends MX_Controller {
    }
    
    public function update_user() {
-   
+    $role_id = $this->session->userdata('role_id');
+
+    if (!has_module_action_permission($role_id, 'user', 'update')) {
+        show_error('You do not have permission to access this page.', 403);
+    }
        $this->form_validation->set_rules(
            'username',
            'username',

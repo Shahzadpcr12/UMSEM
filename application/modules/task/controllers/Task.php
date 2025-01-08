@@ -5,15 +5,19 @@ class Task extends MX_Controller {
 
 	public function __construct()
     {
-        parent::__construct();
-        if (!$this->session->userdata('admin_id')) {
-            redirect('Auth/index');
-        }
+        // parent::__construct();
+        // if (!$this->session->userdata('admin_id')) {
+        //     redirect('Auth/index');
+        // }
     }
 
     public function task()
     { 
-        // $data['roles'] = $this->db->get('roles')->result();
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'task', 'view')) {
+            show_error('You do not have permission to view this page.', 403);
+        }
         $data["all_users"] = get_query_data("
         SELECT tasks.*, employees.username, employees.id AS employee_id
         FROM tasks
@@ -21,33 +25,12 @@ class Task extends MX_Controller {
     ");
     
     
-    //      echo "<pre>";
-    //    print_r($data['all_users']);
-    //    exit();
-
+  
     $data["all_dep"] = get_query_data("
 	SELECT * from departments");
         $data["all_employees"] = get_query_data("
         SELECT * from employees");
-        // $data["all_role"] = get_query_data("
-        //    SELECT * from roles");
-    //        $data["all_employee"] = get_query_data("
-    //    SELECT 
-    //        employees.*, 
-    //        users.username, 
-    //        departments.dep_name
-    //    FROM 
-    //        employees
-    //    LEFT JOIN 
-    //        users ON employees.user_id = users.id
-    //    LEFT JOIN 
-    //        departments ON employees.department_id = departments.id
-    //    ");
-   
-    //    echo "<pre>";
-    //    print_r($data['all_employee']);
-    //    exit();
-   
+        
     $data["all_tasks"] = get_query_data(" 
     SELECT 
         tasks.*, 
@@ -150,6 +133,14 @@ class Task extends MX_Controller {
     // }
     
     public function add_task() {
+
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'task', 'add')) {
+            show_error('You do not have permission to view this page.', 403);
+        }
+        $user_id = $this->session->userdata('user_id');
+
         $title = $this->input->post('title');
         $description = $this->input->post('description');
         $department_id = $this->input->post('department_id');
@@ -164,10 +155,22 @@ class Task extends MX_Controller {
             'to_assigned' => $to_assigned,
             'status' => $status,
             'priority' => $priority,
+            'createby' => $user_id,
         ];
     
         $this->db->trans_start();
         $this->db->insert('tasks', $data);
+
+
+$last_inserted_id = $this->db->insert_id();
+
+$logdata =  [
+    'task_id' => $last_inserted_id,
+    'status' => 'add',
+    'user_id' => $user_id,
+   
+];
+$this->db->insert('task_activity_log', $logdata);
         $this->db->trans_complete();
     
         if ($this->db->trans_status() === FALSE) {
@@ -214,11 +217,12 @@ class Task extends MX_Controller {
     }
     
     public function edit_task($id) {
-       
-        if (!isset($id) || empty($id)) {
-            show_404(); 
-            return;
+        $role_id = $this->session->userdata('role_id');
+
+        if (!has_module_action_permission($role_id, 'task', 'update')) {
+            show_error('You do not have permission to view this page.', 403);
         }
+        
         $data["all_dep"] = get_query_data("
         SELECT * from departments");
             $data["all_employees"] = get_query_data("
@@ -254,8 +258,13 @@ class Task extends MX_Controller {
     
 
     public function update_task() {
+        $role_id = $this->session->userdata('role_id');
 
+        if (!has_module_action_permission($role_id, 'task', 'update')) {
+            show_error('You do not have permission to view this page.', 403);
+        }
         
+        $user_id = $this->session->userdata('user_id');
     
        
         $title = $this->input->post('title');
@@ -274,23 +283,19 @@ class Task extends MX_Controller {
                 'status' => $status,
                 'priority' => $priority, 
             ];
-    //  echo "<pre>";
-    // print_r($data);
-    // exit();
+
             $this->db->where('id', $id);
             $this->db->update('tasks', $data);
     
-            // if ($this->db->affected_rows() > 0) {
-            //     $this->session->set_flashdata('swal', [
-            //         'type' => 'success',
-            //         'message' => 'Employee updated successfully.'
-            //     ]);
-            // } else {
-            //     $this->session->set_flashdata('swal', [
-            //         'type' => 'warning',
-            //         'message' => 'No changes were made.'
-            //     ]);
-            // }
+
+            $logdata =  [
+    'task_id' => $id,
+    'status' => 'edit',
+    'user_id' => $user_id,
+   
+];
+$this->db->insert('task_activity_log', $logdata);
+
             redirect(base_url('Tasks'));
         }
         public function bulk_update()
@@ -309,6 +314,12 @@ class Task extends MX_Controller {
         }
         public function bulk_delete()
         {
+
+            $role_id = $this->session->userdata('role_id');
+
+            if (!has_module_action_permission($role_id, 'task', 'delete')) {
+                show_error('You do not have permission to view this page.', 403);
+            }
             if ($this->input->method() === 'post') {
                 $task_ids = $this->input->post('task_ids');
         
