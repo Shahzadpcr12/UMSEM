@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2025 at 07:28 PM
+-- Generation Time: Jan 09, 2025 at 09:01 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.28
 
@@ -67,9 +67,9 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`id`, `username`, `email`, `password`, `department_id`, `role_id`, `designation`, `contact_info`, `status`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'pehita', 'qirepehita@mailinator.com', '4fc333e0a029154c9437ab17980b9661', NULL, 1, 'aaaa', '3333', 'Inactive', 4, '2025-01-05', '2025-01-08 16:17:08'),
-(5, 'boqocuqyd', 'lezi@mailinator.com', '25d55ad283aa400af464c76d713c07ad', NULL, 2, 'Illo veniam minim r', '754535435435', 'Active', NULL, '2025-01-06', '2025-01-08 15:49:23'),
+(5, '', 'lezi@mailinator.com', '25d55ad283aa400af464c76d713c07ad', '4', 2, 'Illo veniam minim r', '754535435435', 'Active', 1, '2025-01-06', '2025-01-09 06:44:42'),
 (6, 'toxuwy34', 'nugaqyzi@mailinator.com', '25d55ad283aa400af464c76d713c07ad', '3', 2, 'Quaerat eum est vel', '44', 'Inactive', NULL, '2025-01-06', '2025-01-08 18:19:30'),
-(10, 'admin', 'admin@gmail.com', '25d55ad283aa400af464c76d713c07ad', NULL, 1, '', '', 'Active', NULL, '2025-01-08', '2025-01-08 18:13:57');
+(10, 'admin', 'admin@gmail.com', '25d55ad283aa400af464c76d713c07ad', NULL, 1, 'admin', '4343434', 'Active', NULL, '2025-01-08', '2025-01-09 08:00:27');
 
 -- --------------------------------------------------------
 
@@ -154,30 +154,31 @@ CREATE TABLE `role_permissions` (
 INSERT INTO `role_permissions` (`id`, `role_id`, `permission_id`) VALUES
 (9, 2, 14),
 (10, 2, 17),
-(265, 1, 14),
-(266, 1, 18),
-(267, 1, 52),
-(268, 1, 15),
-(269, 1, 17),
-(270, 1, 21),
-(271, 1, 20),
-(272, 1, 26),
-(273, 1, 27),
-(274, 1, 28),
-(275, 1, 33),
-(276, 1, 34),
-(277, 1, 35),
-(278, 1, 36),
-(279, 1, 37),
-(280, 1, 38),
-(281, 1, 39),
-(282, 1, 40),
-(283, 1, 41),
-(284, 1, 42),
-(285, 1, 43),
-(286, 1, 44),
-(287, 1, 48),
-(288, 1, 49);
+(289, 1, 14),
+(290, 1, 18),
+(291, 1, 50),
+(292, 1, 52),
+(293, 1, 15),
+(294, 1, 17),
+(295, 1, 21),
+(296, 1, 20),
+(297, 1, 26),
+(298, 1, 27),
+(299, 1, 28),
+(300, 1, 33),
+(301, 1, 34),
+(302, 1, 35),
+(303, 1, 36),
+(304, 1, 37),
+(305, 1, 38),
+(306, 1, 39),
+(307, 1, 40),
+(308, 1, 41),
+(309, 1, 42),
+(310, 1, 43),
+(311, 1, 44),
+(312, 1, 48),
+(313, 1, 49);
 
 -- --------------------------------------------------------
 
@@ -205,9 +206,9 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `title`, `description`, `assigned_tos`, `department_id`, `to_assigned`, `priority`, `status`, `created_by`, `createby`, `created_at`, `updated_at`) VALUES
-(19, 'sadasdasd', NULL, NULL, 3, '', 'Low', 'In Progress', NULL, NULL, '2025-01-07 11:42:24', '2025-01-08 18:23:20'),
-(22, 'Quae ipsa veniam a', 'Ut minus omnis qui m', NULL, NULL, '3', 'Medium', 'In Progress', NULL, NULL, '2025-01-07 13:38:14', '2025-01-07 13:38:14'),
-(23, 'Pariatur Veniam eo', 'Sed nisi magna quia ', NULL, NULL, '5', 'Medium', 'Pending', NULL, NULL, '2025-01-08 16:20:18', '2025-01-08 16:20:18'),
+(19, 'sadasdasd', NULL, NULL, 3, '', 'Low', 'Pending', NULL, NULL, '2025-01-07 11:42:24', '2025-01-09 06:45:15'),
+(22, 'Quae ipsa veniam a', NULL, NULL, 3, '6', 'Medium', 'In Progress', NULL, NULL, '2025-01-07 13:38:14', '2025-01-09 06:55:09'),
+(23, 'Pariatur Veniam eo', NULL, NULL, 3, '1', 'Medium', 'Pending', NULL, NULL, '2025-01-08 16:20:18', '2025-01-09 06:54:23'),
 (24, 'Omnis expedita quia ', 'Autem distinctio Pr', NULL, NULL, '1', 'Medium', 'Pending', NULL, NULL, '2025-01-08 16:21:39', '2025-01-08 16:21:39'),
 (26, 'Ex adipisci occaecat', 'Dolor est reiciendis', NULL, NULL, '9', 'Medium', 'Completed', NULL, '8', '2025-01-08 16:26:40', '2025-01-08 16:26:40'),
 (31, 'Ad consequatur In s', 'Odio deleniti ullam ', NULL, NULL, '6', 'Medium', 'Pending', NULL, '8', '2025-01-08 18:03:53', '2025-01-08 18:03:53');
@@ -224,7 +225,7 @@ CREATE TABLE `task_activity_log` (
   `task_id` varchar(255) NOT NULL,
   `status` varchar(255) DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `updated_date` date NOT NULL
+  `updated_date` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -232,7 +233,10 @@ CREATE TABLE `task_activity_log` (
 --
 
 INSERT INTO `task_activity_log` (`id`, `user_id`, `task_id`, `status`, `created_date`, `updated_date`) VALUES
-(6, '10', '19', 'edit', '2025-01-08 18:23:20', '0000-00-00');
+(6, '10', '19', 'edit', '2025-01-08 18:23:20', '0000-00-00 00:00:00'),
+(7, '10', '19', 'edit', '2025-01-09 06:45:15', '0000-00-00 00:00:00'),
+(8, '10', '23', 'edit', '2025-01-09 06:54:23', NULL),
+(9, '10', '22', 'edit', '2025-01-09 06:55:09', '2025-01-09 06:55:09');
 
 -- --------------------------------------------------------
 
@@ -379,7 +383,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_permissions`
 --
 ALTER TABLE `role_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=289;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=314;
 
 --
 -- AUTO_INCREMENT for table `tasks`
@@ -391,7 +395,7 @@ ALTER TABLE `tasks`
 -- AUTO_INCREMENT for table `task_activity_log`
 --
 ALTER TABLE `task_activity_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`

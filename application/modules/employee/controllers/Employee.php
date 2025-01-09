@@ -210,4 +210,63 @@ class Employee extends MY_Controller {
         }
         redirect(base_url('Employees'));
     }
+
+    public function edit_profile() { 
+        // $this->load->model('Permission_model');
+        $USER_ID = $this->session->userdata('user_id');
+
+    //     if (!has_module_action_permission($role_id, 'employee', 'view')) {
+    //         show_error('You do not have permission to view this page.', 403);
+    //     }
+     
+        $data["profile"] = get_query_data("SELECT * FROM employees where id  = $USER_ID");
+ 
+    
+    // echo "<pre>";
+    // print_r($data["all_users"]);
+    // exit();
+        $this->load->view('admin/header');
+        $this->load->view('admin/side_bar');
+        $this->load->view('edit_profile',$data);
+        $this->load->view('admin/footer');
+    }
+
+    public function update_employee() {
+        
+
+        // $email = $this->input->post('email');
+        $id = $this->input->post('id');
+        $designation = $this->input->post('designation');
+        $contact_info = $this->input->post('contact_info');
+        $username = $this->input->post('username');
+        // $department_id = $this->input->post('department_id');
+        // $user_id = $this->input->post('user_id');
+        // $status = $this->input->post('status');
+
+        $data = [
+            // 'email' => $email,
+            'username' => $username,  
+            // 'department_id' => $department_id,  
+            'user_id' => $user_id,  
+            // 'status' => $status,  
+            'designation' => $designation,  
+            'contact_info' => $contact_info
+        ];
+
+        $this->db->where('id', $id);
+        $this->db->update('employees', $data);
+
+        if ($this->db->affected_rows() > 0) {
+            $this->session->set_flashdata('swal', [
+                'type' => 'success',
+                'message' => 'Profile updated successfully.'
+            ]);
+        } else {
+            $this->session->set_flashdata('swal', [
+                'type' => 'warning',
+                'message' => 'No changes were made.'
+            ]);
+        }
+        redirect(base_url('ProfileUpdate'));
+    }
 }

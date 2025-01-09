@@ -19,6 +19,7 @@ $route['Logout'] = 'auth/Auth/logout';
 
 $route['Dashboard'] = 'admin/Admin/index';
 $route['UpdateUser'] = 'user/Users/update_user';
+$route['ProfileUpdate'] = 'employee/Employee/edit_profile';
 // $route['DeleteActivity'] = 'activity_logs/Activity/activity_delete';
 
 

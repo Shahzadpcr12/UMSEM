@@ -34,69 +34,62 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <?php
+        $currentSegment = $this->uri->segment(1); 
+        ?>
 
+        <li class="nav-item">
+            <a href="<?= base_url('Role') ?>" class="nav-link <?= ($currentSegment === 'Role') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Roles</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="<?= base_url('Departments') ?>" class="nav-link <?= ($currentSegment === 'Departments') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Departments</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="<?= base_url('Users') ?>" class="nav-link <?= ($currentSegment === 'Users') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Users</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="<?= base_url('Employees') ?>" class="nav-link <?= ($currentSegment === 'Employees') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Employees</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="<?= base_url('Tasks') ?>" class="nav-link <?= ($currentSegment === 'Tasks') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Tasks</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="<?= base_url('Permissions') ?>" class="nav-link <?= ($currentSegment === 'Permissions') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Permissions</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="<?= base_url('ActivityLogs') ?>" class="nav-link <?= ($currentSegment === 'ActivityLogs') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Activity Logs</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="<?= base_url('ProfileUpdate') ?>" class="nav-link <?= ($currentSegment === 'ProfileUpdate') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Profile</p>
+            </a>
+        </li>
+    </ul>
+</nav>
 
-
-                <li class="nav-item">
-                    <a href="<?= base_url('Role') ?>" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                            Roles
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('Departments') ?>" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                            Departments
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('Users') ?>" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                            Users
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('Employees') ?>" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                            Employees
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="<?= base_url('Tasks') ?>" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                            Tasks
-                        </p>
-                    </a>
-                </li> <li class="nav-item">
-                    <a href="<?= base_url('Permissions') ?>" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                        Permissions
-                        </p>
-                    </a>
-                </li>
-                </li> <li class="nav-item">
-                    <a href="<?= base_url('ActivityLogs') ?>" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                        Activity Logs
-                        </p>
-                    </a>
-                </li>
-            </ul>
-        </nav>
         <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
