@@ -278,4 +278,6 @@ class Users extends MX_Controller {
 	
 		echo json_encode(['success' => true]);
 	}
+
+    
 }

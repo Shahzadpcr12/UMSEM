@@ -38,7 +38,12 @@
         <?php
         $currentSegment = $this->uri->segment(1); 
         ?>
-
+<li class="nav-item">
+            <a href="<?= base_url('Dashboard') ?>" class="nav-link <?= ($currentSegment === 'Dashboard') ? 'active' : '' ?>">
+                <i class="nav-icon far fa-image"></i>
+                <p>Dashboard</p>
+            </a>
+        </li>
         <li class="nav-item">
             <a href="<?= base_url('Role') ?>" class="nav-link <?= ($currentSegment === 'Role') ? 'active' : '' ?>">
                 <i class="nav-icon far fa-image"></i>
