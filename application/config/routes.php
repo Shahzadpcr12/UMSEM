@@ -32,6 +32,6 @@ $route['ActivityLogs'] = 'activity_logs/Activity/activity';
 
 $route['admin-login'] = 'Auth/index';
 
-$route['default_controller'] = 'Auth';
+$route['default_controller'] = 'auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
