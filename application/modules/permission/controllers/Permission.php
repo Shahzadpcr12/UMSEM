@@ -13,8 +13,13 @@ class Permission extends MX_Controller {
         $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'permission', 'view')) {
-            show_error('You do not have permission to access this page.', 403);
+            $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('error', $data);
+            return;
         }
+        
+        
         $data["all_permission"] = get_query_data("
        SELECT * from permissions");
    
@@ -31,10 +36,10 @@ class Permission extends MX_Controller {
     $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'permission', 'add')) {
-            $this->load->view('admin/header');
-            $this->load->view('admin/side_bar');
-            $this->load->view('admin/error');
-            $this->load->view('admin/footer');
+            $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('error', $data);
+            return;
         }
     $module_name = $this->input->post('module_name');
     $actions = $this->input->post('action'); 

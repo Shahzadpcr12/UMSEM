@@ -17,11 +17,10 @@ class Role extends MY_Controller {
         $role_id = $this->session->userdata('role_id');
 
 if (!has_module_action_permission($role_id, 'role', 'view')) {
-    // $this->load->view('admin/header');
-    // $this->load->view('admin/side_bar');
-    // $this->load->view('admin/error');
-    // $this->load->view('admin/footer');
-    show_error('You do not have permission to access this page.', 403);
+    $data['message'] = 'You do not have permission to view this page.';
+    $data['status_code'] = 403; // HTTP Status Code
+    $this->load->view('error_role', $data);
+    return;
 
 }
 
@@ -42,7 +41,10 @@ if (!has_module_action_permission($role_id, 'role', 'view')) {
         $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'role', 'add')) {
-            show_error('You do not have permission to access this page.', 403);
+            $data['message'] = 'You do not have permission to view this page.';
+    $data['status_code'] = 403; // HTTP Status Code
+    $this->load->view('error_role', $data);
+    return;
         }
 		$this->load->library('form_validation');
 	
@@ -88,7 +90,10 @@ public function delete_role($id) {
     $role_id = $this->session->userdata('role_id');
 
     if (!has_module_action_permission($role_id, 'role', 'delete')) {
-        show_error('You do not have permission to access this page.', 403);
+        $data['message'] = 'You do not have permission to view this page.';
+    $data['status_code'] = 403; // HTTP Status Code
+    $this->load->view('error_role', $data);
+    return;
     }
     $this->db->where('id', $id);
     if ($this->db->delete('roles')) {
@@ -110,7 +115,10 @@ public function update_role() {
     $role_id = $this->session->userdata('role_id');
 
     if (!has_module_action_permission($role_id, 'role', 'update')) {
-        show_error('You do not have permission to access this page.', 403);
+        $data['message'] = 'You do not have permission to access this page.';
+    $data['status_code'] = 403; // HTTP Status Code
+    $this->load->view('error_role', $data);
+    return;
     }
     $this->form_validation->set_rules('role', 'Role', 'required|trim');
 

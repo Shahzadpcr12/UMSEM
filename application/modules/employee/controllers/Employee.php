@@ -212,13 +212,15 @@ class Employee extends MY_Controller {
     }
 
     public function edit_profile() { 
+
+       
+        if (!$this->session->userdata('user_id')) {
+            redirect('Auth/index');
+        }
         // $this->load->model('Permission_model');
         $USER_ID = $this->session->userdata('user_id');
 
-    //     if (!has_module_action_permission($role_id, 'employee', 'view')) {
-    //         show_error('You do not have permission to view this page.', 403);
-    //     }
-     
+ 
         $data["profile"] = get_query_data("SELECT * FROM employees where id  = $USER_ID");
  
     

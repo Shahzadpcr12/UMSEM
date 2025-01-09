@@ -16,7 +16,10 @@ class Task extends MX_Controller {
         $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'task', 'view')) {
-            show_error('You do not have permission to view this page.', 403);
+            $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('error_task', $data);
+            return;
         }
         $data["all_users"] = get_query_data("
         SELECT tasks.*, employees.username, employees.id AS employee_id
@@ -137,7 +140,10 @@ class Task extends MX_Controller {
         $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'task', 'add')) {
-            show_error('You do not have permission to view this page.', 403);
+            $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('error_task', $data);
+            return;
         }
         $user_id = $this->session->userdata('user_id');
 
@@ -220,7 +226,10 @@ $this->db->insert('task_activity_log', $logdata);
         $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'task', 'update')) {
-            show_error('You do not have permission to view this page.', 403);
+            $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('error_task', $data);
+            return;
         }
         
         $data["all_dep"] = get_query_data("
@@ -261,7 +270,10 @@ $this->db->insert('task_activity_log', $logdata);
         $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'task', 'update')) {
-            show_error('You do not have permission to view this page.', 403);
+            $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('error_task', $data);
+            return;
         }
         
         $user_id = $this->session->userdata('user_id');
