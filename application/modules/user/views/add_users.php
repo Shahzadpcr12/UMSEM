@@ -478,16 +478,16 @@ $(document).on('click', '.deactivate-btn, .activate-btn', function() {
     const newStatus = $(this).data('status');
 
     $.ajax({
-        url: "<?php echo base_url('Users/update_status'); ?>",
+        url: "<?php echo base_url('StatusUpdate'); ?>",
         type: "POST",
         data: {
             id: userId,
             status: newStatus
         },
         success: function(response) {
-            // Reload the table or update the status dynamically
+           
             alert('User status updated successfully.');
-            location.reload(); // Reloads the page to reflect changes
+            location.reload(); 
         },
         error: function() {
             alert('Error updating user status.');

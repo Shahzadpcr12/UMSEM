@@ -378,6 +378,7 @@
                         <!-- /.card-body -->
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -385,8 +386,42 @@
 </div>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css">
+    
+    <!-- DataTables Buttons CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.2.0/css/buttons.dataTables.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+
+    <!-- DataTables Buttons JS -->
+    <script src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.dataTables.js"></script>
+
+    <!-- JSZip for Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- PDFMake for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <!-- Buttons for HTML5 export -->
+    <script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.html5.min.js"></script>
+
+    <!-- Buttons for Print -->
+    <script src="https://cdn.datatables.net/buttons/3.2.0/js/buttons.print.min.js"></script>
 <script>
-new DataTable('#example1');
+
+new DataTable('#example1', {
+    layout: {
+        topStart: {
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        }
+    }
+});
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -416,7 +451,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
-<script>
+<!-- <script>
 setTimeout(function() {
     document.getElementById('roleErrorAlert').style.display = 'none';
 }, 3000);
@@ -426,7 +461,7 @@ setTimeout(function() {
 setTimeout(function() {
     document.getElementById('invld').style.display = 'none';
 }, 3000);
-</script>
+</script> -->
 
 <script>
 $(document).ready(function() {
@@ -457,7 +492,7 @@ $(document).on('click', '.deactivate-btn, .activate-btn', function() {
     const newStatus = $(this).data('status');
 
     $.ajax({
-        url: "<?php echo base_url('Employee/update_status'); ?>",
+        url: "<?php echo base_url('StatusUpdate'); ?>",
         type: "POST",
         data: {
             id: userId,

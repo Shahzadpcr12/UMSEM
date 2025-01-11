@@ -19,7 +19,51 @@ class Employee extends MY_Controller {
         if (!has_module_action_permission($role_id, 'employee', 'view')) {
             show_error('You do not have permission to view this page.', 403);
         }
-     
+
+        if (($department_id = $this->input->post('department_id')) != '' || 
+    ($designation = $this->input->post('designation')) != '' || 
+    ($status = $this->input->post('status')) != '') {
+   
+
+        $department_id = $this->input->post('department_id');
+        $designation = $this->input->post('designation');
+        $status = $this->input->post('status');
+    
+        // Build the query
+        $this->db->select('employees.*, departments.dep_name');
+        $this->db->from('employees');
+        $this->db->join('departments', 'employees.department_id = departments.id', 'left');
+    
+        if (!empty($department_id)) {
+            $this->db->where('employees.department_id', $department_id);
+        }
+        if (!empty($designation)) {
+            $this->db->where('employees.designation', $designation);
+        }
+        if (!empty($status)) {
+            $this->db->where('employees.status', $status);
+        }
+    
+        $query = $this->db->get();
+        $data['employees'] = $query->result();
+    
+        // Load the PDF library
+        $this->load->library('dompdf_gen');
+    
+        // Load the view file for the PDF
+        $html = $this->load->view('employee_report', $data, true);
+    
+        // Initialize DOMPDF
+        $this->dompdf->loadHtml($html);
+        $this->dompdf->setPaper('A4', 'landscape'); // Set paper size and orientation
+        $this->dompdf->render();
+
+        // $this->load->view('admin/header');
+        // $this->load->view('admin/side_bar');
+        // $this->load->view('employee', $data);
+        // $this->load->view('admin/footer');
+
+    }else{
         $data["all_users"] = get_query_data("SELECT * FROM users");
         $data["empall"] = get_query_data("SELECT * FROM employees");
         $data["depall"] = get_query_data("SELECT * FROM departments");
@@ -44,6 +88,7 @@ class Employee extends MY_Controller {
         $this->load->view('admin/side_bar');
         $this->load->view('employee', $data);
         $this->load->view('admin/footer');
+    }
     }
     
 
@@ -271,4 +316,18 @@ class Employee extends MY_Controller {
         }
         redirect(base_url('ProfileUpdate'));
     }
+
+    // public function filter_employees()
+    // {
+    //     $department = $this->input->post('department');
+    //     $designation = $this->input->post('designation');
+    
+    //     $this->load->model('Employee_model');
+    //     $filtered_employees = $this->Employee_model->get_filtered_employees($department, $designation);
+    
+    //     // Send JSON response
+    //     echo json_encode(['status' => 'success', 'data' => $filtered_employees]);
+    // }
+    
+
 }

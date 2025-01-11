@@ -13,6 +13,10 @@ $route['Task/bulk_update'] = 'task/Task/bulk_update';
 $route['Task/bulk_delete'] = 'task/Task/bulk_delete';
 
 $route['Logout'] = 'auth/Auth/logout';
+$route['StatusUpdate'] = 'user/Users/update_status';
+$route['FilterEmployee'] = 'employee/Employee/filter_employees';
+// $route['EmployeePdf'] = 'employee/Employee/export_pdf';
+// $route['EmployeeExcel'] = 'employee/Employee/export_excel';
 
 
 
