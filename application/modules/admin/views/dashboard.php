@@ -28,12 +28,12 @@
                     <div class="small-box bg-info">
                         <div class="inner">
                             <h3><?php
-                $data["total_users"] = get_query_data("SELECT COUNT(id) AS total FROM users");
-                $data["total_tasks"] = get_query_data("SELECT COUNT(id) AS total FROM tasks");
-                $data["total_departments"] = get_query_data("SELECT COUNT(id) AS total FROM departments");
+                $data["total_users"] = get_query_data("SELECT COUNT(id) AS total_us FROM users");
+                $data["total_tasks"] = get_query_data("SELECT COUNT(id) AS total_ta FROM tasks");
+                $data["total_departments"] = get_query_data("SELECT COUNT(id) AS total_de FROM departments");
                 
           ?>
-                                <h3><?php echo $data['total_users'][0]->total; ?></h3>
+                                <h3><?php echo $data['total_users'][0]->total_us; ?></h3>
                                 <p>Users</p>
                         </div>
                         <div class="icon">
@@ -47,7 +47,7 @@
                     <!-- small box -->
                     <div class="small-box bg-success">
                         <div class="inner">
-                            <h3><?php echo $data['total_tasks'][0]->total; ?></h3>
+                            <h3><?php echo $data['total_departments'][0]->total_de; ?></h3>
 
                             <p>Departments</p>
                         </div>
@@ -62,7 +62,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3><?php echo $data['total_departments'][0]->total; ?></h3>
+                            <h3><?php echo $data['total_tasks'][0]->total_ta; ?></h3>
 
                             <p>Tasks</p>
                         </div>

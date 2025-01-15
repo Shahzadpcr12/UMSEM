@@ -190,7 +190,7 @@
                             <table id="example1" class="table table-hover text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>SerialNumber</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Status</th>
@@ -232,9 +232,11 @@
                                 </thead>
                                 <tbody>
                                     <?php if ($all_employee): ?>
+                                    <?php $serialNumber = 1; ?>
+
                                     <?php foreach ($all_employee as $employee): ?>
                                     <tr>
-                                        <td><?php echo $employee->id; ?></td>
+                                        <td><?php echo $serialNumber++; ?></td>
                                         <td><?php echo $employee->name; ?></td>
                                         <td><?php echo $employee->email; ?></td>
                                         <td>
