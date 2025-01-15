@@ -21,8 +21,8 @@ class Employee extends MY_Controller {
         }
 
         if (($department_id = $this->input->post('department_id')) != '' || 
-    ($designation = $this->input->post('designation')) != '' || 
-    ($status = $this->input->post('status')) != '') {
+            ($designation = $this->input->post('designation')) != '' || 
+            ($status = $this->input->post('status')) != '') {
    
 
         $department_id = $this->input->post('department_id');
@@ -73,15 +73,21 @@ class Employee extends MY_Controller {
         SELECT 
             employees.*, 
             employees.username AS name,
-            users.username, 
-            departments.dep_name
+            users.username AS user_username, 
+            departments.dep_name,
+            roles.role AS role_name
         FROM 
             employees
         LEFT JOIN 
             users ON employees.user_id = users.id
         LEFT JOIN 
             departments ON employees.department_id = departments.id
+        LEFT JOIN 
+            roles ON employees.role_id = roles.id
+        WHERE 
+            roles.role != 'Admin' OR roles.role IS NULL
     ");
+    
     
     
         $this->load->view('admin/header');
