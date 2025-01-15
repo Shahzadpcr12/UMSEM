@@ -16,18 +16,22 @@ class Role extends MY_Controller {
 	{
         $role_id = $this->session->userdata('role_id');
 
-if (!has_module_action_permission($role_id, 'role', 'view')) {
+  if (!has_module_action_permission($role_id, 'role', 'view')) {
     $data['message'] = 'You do not have permission to view this page.';
     $data['status_code'] = 403; // HTTP Status Code
     $this->load->view('error_role', $data);
     return;
 
-}
+  }
 
 
 
-		$data["all_roles"] = get_query_data("
-		SELECT * from roles");
+       $data["all_roles"] = get_query_data("
+        SELECT * 
+        FROM roles
+        WHERE role != 'Admin'
+        ");
+
 		$this->load->view('admin/header');
 		$this->load->view('admin/side_bar');
 		$this->load->view('roles',$data);
