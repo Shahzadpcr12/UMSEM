@@ -194,6 +194,7 @@
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Status</th>
+                                        <th>Role</th>
                                         <th>
                                             Department
                                             <br>
@@ -241,6 +242,8 @@
                                                 <?php echo $employee->status; ?>
                                             </span>
                                         </td>
+                                        <td><?php echo $employee->role_name; ?></td>
+
                                         <td>
                                             <span class="badge bg-success" style="font-size: 14px; padding: 8px;">
                                                 <?php echo $employee->dep_name; ?>

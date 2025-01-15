@@ -3,13 +3,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Role extends MY_Controller {
 
-    // public function __construct() {
-    //     parent::__construct();
-    //     $this->check_login();  
-
-       
-    //     $this->restrict_access(1);
-    // }
+    public function __construct() {
+        parent::__construct();
+        if (!$this->session->userdata('user_id')) {
+            redirect('Auth/index');
+        }
+    }
 	
 
 	public function roles()

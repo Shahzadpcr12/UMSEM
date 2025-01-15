@@ -5,11 +5,9 @@ class Employee extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        // Check if user is logged in
-        // $this->check_login();  // Call the check_login method from MY_Controller
-
-        // // Restrict access to the 'view_employees' permission (permission_id = 1)
-        // $this->restrict_access(1);
+        if (!$this->session->userdata('user_id')) {
+            redirect('Auth/index');
+        }
     }
 
     public function employees() { 
@@ -29,7 +27,6 @@ class Employee extends MY_Controller {
         $designation = $this->input->post('designation');
         $status = $this->input->post('status');
     
-        // Build the query
         $this->db->select('employees.*, departments.dep_name');
         $this->db->from('employees');
         $this->db->join('departments', 'employees.department_id = departments.id', 'left');
@@ -47,10 +44,8 @@ class Employee extends MY_Controller {
         $query = $this->db->get();
         $data['employees'] = $query->result();
     
-        // Load the PDF library
         $this->load->library('dompdf_gen');
     
-        // Load the view file for the PDF
         $html = $this->load->view('employee_report', $data, true);
     
         // Initialize DOMPDF
@@ -88,7 +83,9 @@ class Employee extends MY_Controller {
             roles.role != 'Admin' OR roles.role IS NULL
     ");
     
-    
+    // echo "<pre>";
+    // print_r($data["all_employee"]);
+    // exit();
     
         $this->load->view('admin/header');
         $this->load->view('admin/side_bar');
@@ -168,7 +165,6 @@ class Employee extends MY_Controller {
     }
 
     public function filter_emp() {
-        // $this->restrict_access(3);
 
         $department_id = $this->input->post('department_id');
         $designation = $this->input->post('role_id'); 

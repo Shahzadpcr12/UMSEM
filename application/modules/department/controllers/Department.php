@@ -3,12 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Department extends MX_Controller {
 
-	public function __construct()
-    {
-        // parent::__construct();
-        // if (!$this->session->userdata('admin_id')) {
-        //     redirect('Auth/index');
-        // }
+    public function __construct() {
+        parent::__construct();
+        if (!$this->session->userdata('user_id')) {
+            redirect('Auth/index');
+        }
     }
 
     public function departments()
