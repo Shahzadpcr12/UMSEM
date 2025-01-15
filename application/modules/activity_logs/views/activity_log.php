@@ -46,7 +46,7 @@
             <th>Id</th>
             <th>Task title</th>
             <th>Action by</th>
-            <th>Action</th>
+            <!-- <th>Action</th> -->
             <th>Create Date/Time</th>
             <th>Update Date/Time</th>
             <!-- <th>Delete</th> -->
@@ -59,11 +59,7 @@
                     <td><?php echo $logs->id; ?></td>
                     <td><?php echo $logs->title; ?></td>
                     <td><?php echo $logs->username; ?></td>
-                    <td>
-                        <span class="badge bg-success" style="font-size: 14px; padding: 8px;">
-                            <?php echo $logs->status; ?>
-                        </span>
-                    </td>
+                    
                     <td><?php echo $logs->created_date; ?></td>
                     <td><?php echo $logs->updated_date; ?></td>
 

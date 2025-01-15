@@ -28,17 +28,20 @@ class Users extends MX_Controller {
         $data["all_role"] = get_query_data("
            SELECT * from roles");
            $data["all_users"] = get_query_data("
-       SELECT 
-           employees.*, 
-           roles.role, 
-           departments.dep_name
-       FROM 
-           employees
-       LEFT JOIN 
-           roles ON employees.role_id = roles.id
-       LEFT JOIN 
-           departments ON employees.department_id = departments.id
-       ");
+    SELECT 
+        employees.*, 
+        roles.role, 
+        departments.dep_name
+    FROM 
+        employees
+    LEFT JOIN 
+        roles ON employees.role_id = roles.id
+    LEFT JOIN 
+        departments ON employees.department_id = departments.id
+    WHERE 
+        roles.role != 'Admin' OR roles.role IS NULL
+");
+
    
        // echo "<pre>";
        // print_r($data['all_data']);

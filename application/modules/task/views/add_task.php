@@ -47,7 +47,7 @@
                         </div>
                         <?php endif; ?>
 
-                        <div id="taskFormContainer">
+                        <div id="taskFormContainer" style="display: none;">
                             <!-- style="display:none;" -->
                             <form action="<?php echo base_url().'Task/add_task'; ?>" method="POST">
                                 <div class="card-body">

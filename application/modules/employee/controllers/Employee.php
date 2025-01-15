@@ -281,21 +281,16 @@ class Employee extends MY_Controller {
     public function update_employee() {
         
 
-        // $email = $this->input->post('email');
+        
         $id = $this->input->post('id');
         $designation = $this->input->post('designation');
         $contact_info = $this->input->post('contact_info');
         $username = $this->input->post('username');
-        // $department_id = $this->input->post('department_id');
-        // $user_id = $this->input->post('user_id');
-        // $status = $this->input->post('status');
+      
 
         $data = [
-            // 'email' => $email,
             'username' => $username,  
-            // 'department_id' => $department_id,  
             'user_id' => $user_id,  
-            // 'status' => $status,  
             'designation' => $designation,  
             'contact_info' => $contact_info
         ];
@@ -304,15 +299,11 @@ class Employee extends MY_Controller {
         $this->db->update('employees', $data);
 
         if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('swal', [
-                'type' => 'success',
-                'message' => 'Profile updated successfully.'
-            ]);
+            $this->session->set_flashdata('successfull', 'Profile successfully updated.');
+
         } else {
-            $this->session->set_flashdata('swal', [
-                'type' => 'warning',
-                'message' => 'No changes were made.'
-            ]);
+            $this->session->set_flashdata('invalid', 'Try Again.');
+
         }
         redirect(base_url('ProfileUpdate'));
     }

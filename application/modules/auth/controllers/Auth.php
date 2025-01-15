@@ -45,7 +45,7 @@ class Auth extends CI_Controller {
             
             redirect('Dashboard');
         } else {
-            $this->session->set_flashdata('error', 'Invalid login credentials.');
+            $this->session->set_flashdata('invalid', 'Wrong email or passowrd.');
             redirect(base_url('admin-login'));
         }
     }

@@ -74,7 +74,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="add_permission">Add Permission</label>
+                                                <label for="add_permission">Add Action</label>
                                                 <input type="checkbox" class="form-control" id="add_permission"
                                                     name="action[]" value="add">
                                             </div>
@@ -82,7 +82,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="delete_permission">Delete Permission</label>
+                                                <label for="delete_permission">Delete Action</label>
                                                 <input type="checkbox" class="form-control" id="delete_permission"
                                                     name="action[]" value="delete">
                                             </div>
@@ -91,7 +91,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="view_permission">View Permission</label>
+                                                <label for="view_permission">View Action</label>
                                                 <input type="checkbox" class="form-control" id="view_permission"
                                                     name="action[]" value="view">
                                             </div>
@@ -99,7 +99,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="update_permission">Update Permission</label>
+                                                <label for="update_permission">Update Action</label>
                                                 <input type="checkbox" class="form-control" id="update_permission"
                                                     name="action[]" value="update">
                                             </div>
@@ -129,7 +129,7 @@
                                         <th>Id</th>
                                         <th>Module Name</th>
                                         <th>Action</th>
-                                        <th>Update</th>
+                                        <th>Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -77,7 +77,14 @@
                         <div class="card-header">
                             <h3 class="card-title">All Departments</h3>
                         </div>
-                        <!-- /.card-header -->
+                        <?php if($this->session->flashdata('success'))
+                                            {
+                                         ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $this->session->flashdata('success');
+                                            ?>
+                </div>
+                <?php   } ?>
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
@@ -125,7 +132,7 @@
                                                                 <input type="hidden" name="id"
                                                                     value="<?php echo $dep->id; ?>">
                                                                 <div class="form-group">
-                                                                    <label for="role">Role Department</label>
+                                                                    <label for="role"> Department</label>
                                                                     <input type="text" name="dep_name"
                                                                         class="form-control"
                                                                         value="<?php echo $dep->dep_name; ?>" required>
@@ -189,15 +196,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
-</script>
-<script>
-setTimeout(function() {
-    document.getElementById('roleErrorAlert').style.display = 'none';
-}, 3000);
-setTimeout(function() {
-    document.getElementById('unsuccess').style.display = 'none';
-}, 3000);
-setTimeout(function() {
-    document.getElementById('invld').style.display = 'none';
-}, 3000);
 </script>

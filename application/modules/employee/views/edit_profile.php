@@ -54,7 +54,7 @@
                                         <input type="hidden" name="id" value="<?php echo $profile[0]->id; ?>">
 
                                         <div class="form-group">
-                                            <label for="role">Title</label>
+                                            <label for="role">User Name</label>
                                             <input type="text" name="username" class="form-control"
                                                 value="<?php echo $profile[0]->username; ?>">
                                         </div>

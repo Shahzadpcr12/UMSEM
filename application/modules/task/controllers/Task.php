@@ -305,9 +305,16 @@ $this->db->insert('task_activity_log', $logdata);
     'status' => 'edit',
     'user_id' => $user_id,
    
-];
-$this->db->insert('task_activity_log', $logdata);
+    ];
+    $this->db->insert('task_activity_log', $logdata);
+    if ($this->db->affected_rows() > 0) {
+        $this->session->set_flashdata('success', 'Successfully Update.');
 
+        
+    } else {
+        $this->session->set_flashdata('invalid', 'Something went wrong.');
+
+    }
             redirect(base_url('Tasks'));
         }
         public function bulk_update()
@@ -319,7 +326,7 @@ $this->db->insert('task_activity_log', $logdata);
                 $this->db->where_in('id', $task_ids);
                 $this->db->update('tasks', ['status' => $status]);
         
-                $this->session->set_flashdata('message', 'Tasks updated successfully!');
+                $this->session->set_flashdata('success', 'Tasks updated successfully!');
             }
         
             redirect('Tasks');

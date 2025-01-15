@@ -38,7 +38,7 @@
 
                         <?php if ($this->session->flashdata('successfull')): ?>
                         <div class="alert alert-success" role="alert" id="unsuccess">
-                            <?php echo $this->session->flashdata('successfull'); ?>
+                            <?php echo $this->session->flashdata('success'); ?>
                         </div>
                         <?php endif; ?>
                         <?php if ($this->session->flashdata('existing_role_error')): ?>
@@ -146,7 +146,7 @@
                                 </div>
 
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Add</button>
+                                    <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                         </form>
 

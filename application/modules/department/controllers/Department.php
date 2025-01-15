@@ -16,7 +16,10 @@ class Department extends MX_Controller {
         $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'department', 'view')) {
-            show_error('You do not have permission to access this page.', 403);
+            $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('dep_error', $data);
+            return;
         }
 		$data["all_dep"] = get_query_data("
 		SELECT * from departments");
@@ -33,7 +36,10 @@ class Department extends MX_Controller {
         $role_id = $this->session->userdata('role_id');
 
         if (!has_module_action_permission($role_id, 'department', 'add')) {
-            show_error('You do not have permission to access this page.', 403);
+            $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('dep_error', $data);
+            return;
         }
 		$this->load->library('form_validation');
 	
@@ -80,11 +86,10 @@ public function delete_department($id) {
     $role_id = $this->session->userdata('role_id');
 
     if (!has_module_action_permission($role_id, 'department', 'delete')) {
-        // $this->load->view('admin/header');
-        // $this->load->view('admin/side_bar');
-        // $this->load->view('admin/error');
-        // $this->load->view('admin/footer');
-        show_error('You do not have permission to access this page.', 403);
+        $data['message'] = 'You do not have permission to view this page.';
+            $data['status_code'] = 403; 
+            $this->load->view('dep_error', $data);
+            return;
     }
     $this->db->where('id', $id);
     if ($this->db->delete('departments')) {
@@ -105,7 +110,10 @@ public function update_department() {
     $role_id = $this->session->userdata('role_id');
 
     if (!has_module_action_permission($role_id, 'department', 'update')) {
-        show_error('You do not have permission to access this page.', 403);
+        $data['message'] = 'You do not have permission to view this page.';
+        $data['status_code'] = 403; 
+        $this->load->view('dep_error', $data);
+        return;
     }
     $this->form_validation->set_rules('dep_name', 'dep_name', 'required|trim');
 
@@ -123,15 +131,12 @@ public function update_department() {
         $this->db->update('departments', ['dep_name' => $dep_name]);
 
         if ($this->db->affected_rows() > 0) {
-            $this->session->set_flashdata('swal', [
-                'type' => 'success',
-                'message' => 'Departments updated successfully.'
-            ]);
+            $this->session->set_flashdata('success', 'Successfully Update.');
+
+            
         } else {
-            $this->session->set_flashdata('swal', [
-                'type' => 'warning',
-                'message' => 'No changes were made.'
-            ]);
+            $this->session->set_flashdata('invalid', 'Something went wrong.');
+
         }
         redirect(base_url('Departments'));
     }
