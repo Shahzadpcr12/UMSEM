@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2025 at 01:35 PM
+-- Generation Time: Jan 15, 2025 at 01:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.28
 
@@ -135,7 +135,8 @@ CREATE TABLE `roles` (
 INSERT INTO `roles` (`id`, `role`) VALUES
 (1, 'Admin'),
 (2, 'Manager'),
-(23, 'sdsd');
+(25, 'User'),
+(26, 'Employee');
 
 -- --------------------------------------------------------
 
@@ -383,7 +384,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `role_permissions`
